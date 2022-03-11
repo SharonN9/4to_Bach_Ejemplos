@@ -1,51 +1,33 @@
-#Decoración: Nombre del Algoritmo
-print("-------------------------------------------------------")
-print("CONVERSOR DE UNIDADES")
-print("-------------------------------------------------------")
-#Constantes
-menu = '''
-1. Longitud
-2. Masa
-3. Tiempo
-4. Energia y Potencia
-5. Volumen
-6. Fuerza
-7. Presion
-8. Area
-9. Salir
-Seleccione una opcion para continuar: '''
-
-dato1 = '''
-Ingrese el valor a convertir con sus unidades (dejando separacion de un espacio): '''
-dato2 = '''Ingrese la unidad a convertir: '''
-
-#Funciones
-def Longitud(valor,dim1, dim2):
-    if dim1 == 'km':
-        if dim2 == 'm':
-            return valor*1000
-        if dim2 == 'dm':
-            return valor*10000
-        if dim2 == 'mm':
-            return valor*1000000
-        if dim2 == 'um':
-            return valor*1000000000
-        if dim2 == 'nm':
-            return valor*1000000000000
-        if dim2 == 'pm':
-            return valor*1000000000000000
-
-    else:
-        return "Verifica las dimensiones"
-
-def Masa():
-    ''
-
-def Tiempo():
-    ''
-#Entradas
-
-print(Longitud(10,"km", "pm"))
-#Proceso
-#Salida
-
+#Elaborar el algoritmo que permita obtener la distancia entre dos
+# puntos en el plano cartesiano A y B utilizando funciones.
+# distancia = ((Ax-Bx)**2 + (Ay-By)**2)**0.5
+#--------------------Variables a Utilizar------------
+#Primera coordenada (2,4)
+punto1x = ''
+punto1y = ''
+#Segunda coordenada (3,6)
+punto2x = ''
+punto2y = ''
+#-------------------- Calculo de Distancia ----------------------
+def distancia(x1,y1,x2,y2):
+    try:
+        x1 = float(x1) # "diez" -> Incorrecto , "10" -> 10.0 Correcto
+        x2 = float(x2)
+        y1 = float(y1)
+        y2 = float(y2)
+        d = ((x1 - x2)**2 + (y1 - y2)**2)**0.5 # realiza el calculo de la distancia -> devuelve un float
+        return "La distancia es de: " + str(d) # 10 -> "10" : devuelve el numero como cadena de texto
+    except:
+        return "Error, no se puede realizar este calculo"
+#------------------- Pregunta al usuario -------------------
+while True:
+    print('''
+    ---------------- CALCULO DE DISTANCIA ENTRE PUNTOS ---------------
+    ''')
+    punto1x = input('Ingrese la coordena X del primer punto: ')
+    punto1y = input('Ingrese la coordena Y del primer punto: ')
+    punto2x = input('Ingrese la coordena X del segundo punto: ')
+    punto2y = input('Ingrese la coordena Y del segundo punto: ')
+    dist = distancia(punto1x,punto1y,punto2x,punto2y)
+    print(dist)
+    input("Presione enter para continuar...")

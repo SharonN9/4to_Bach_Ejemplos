@@ -44,4 +44,4 @@ def AreaCubo(lado):
 
 # print(division(25,5))
 
-Hola("Abel")
+print(suma(10,35))#-> 45)
