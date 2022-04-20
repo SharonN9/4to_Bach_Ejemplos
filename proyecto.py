@@ -23,19 +23,27 @@ print("Comenzando a aprender")
 historial = modelo.fit(celcius, fahrenheit, epochs = 1000)
 print("Modelo entrenado")
 
-import matplotlib.pyplot as plt
-plt.xlabel("# Epoca")
-plt.ylabel("Magnitud de perdida")
-plt.plot(historial.history["loss"])
-plt.show()
+# import matplotlib.pyplot as plt
+# plt.xlabel("# Epoca")
+# plt.ylabel("Magnitud de perdida")
+# plt.plot(historial.history["loss"])
+# plt.show()
 
-print("Hagamos una prediccion")
-resultado = modelo.predict([100, 0])
-print("El resultado es: "+ str(resultado) + " fahrenheit!")
+# print("Hagamos una prediccion")
+# resultado = modelo.predict([100, 0])
+# print("El resultado es: "+ str(resultado) + " fahrenheit!")
 
-print("Variables internas del modelo")
-# print(capa.get_weights())
+# print("Variables internas del modelo")
+# # print(capa.get_weights())
 
-print(oculta1.get_weights())
-print(oculta2.get_weights())
-print(salida.get_weights())
+# print(oculta1.get_weights())
+# print(oculta2.get_weights())
+# print(salida.get_weights())
+
+# resultado = modelo.predict([100.0])
+# print("Prediccion: 100 grados celsius son " + str(resultado) + " fahrenheit!")
+
+#Exportar el modelo en formato h5
+modelo.save('celsius_a_fahrenheit.h5')
+
+#python -m http.server 8080
