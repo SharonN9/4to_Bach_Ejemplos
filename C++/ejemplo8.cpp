@@ -15,7 +15,7 @@ int main(void){
     //Encontrar el numero menor, el mediano y el mayor
     //Utilizando if's
     // if -> if else -> if else if
-    // 4 9 10
+    // 4 9 4
     if(num1>num2){ // Comparo el 1ro con el 2do
         if(num1>num3){ // Comparo el 1ro con el 3ro
             cout << "El primer numero es el mas grande"<<endl;
