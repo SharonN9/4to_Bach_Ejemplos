@@ -2,42 +2,41 @@ import tensorflow as ts
 import numpy as np
 import matplotlib.pyplot as plt
 
-celsius = np.array([-40, -10, 0, 8, 15, 22,38])
-fahrenheit = np.array([-40, 14, 32, 46, 59, 72, 100])
+x = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+y = np.array([1,2,2,4,5,4,6,4,6,7,9,10,11,12,10])
 
-oculta1 = ts.keras.layers.Dense(units = 4, input_shape = [1])
-oculta2 = ts.keras.layers.Dense(units = 4, input_shape = [1])
-oculta3 = ts.keras.layers.Dense(units = 4, input_shape = [1])
-oculta4 = ts.keras.layers.Dense(units = 3, input_shape = [1])
-oculta5 = ts.keras.layers.Dense(units = 3, input_shape = [1])
+capa1 = ts.keras.layers.Dense(units = 4, input_shape = [1])
 salida = ts.keras.layers.Dense(units = 1, input_shape = [1])
 
-
-## lista = [1,2,3]
-modelo = ts.keras.Sequential([oculta1, oculta2, oculta3, oculta4, oculta5, salida])
+modelo = ts.keras.Sequential([capa1,salida])
 
 modelo.compile(
-    optimizer = ts.keras.optimizers.Adam(0.1),
+    optimizer = ts.keras.optimizers.Adam(0.01),
     loss = 'mean_squared_error'
 )
+historial = modelo.fit(x, y, epochs = 500)
 
-print('Estoy comenzando a aprender')
-historial = modelo.fit(celsius, fahrenheit, epochs = 2000)
-print("Modelo entrenado")
+datos_prueba = [4,7,9,16,20]
+resultados = []
+print('Variables de prueba:')
+for i in datos_prueba:
+    var = modelo.predict([i])[0]
+    print(var)
+    resultados.append(var)
 
+datos_prueba2 = np.array(datos_prueba)
+resultados2 = np.array(resultados)
 
-plt.xlabel("No. Iteracion")
-plt.ylabel("Perdida de Datos")
-plt.plot(historial.history["loss"])
+# plt.plot(x,y, label="Entrada")
+plt.plot(x,y,'o', label="Entrada")
+plt.plot(datos_prueba2,resultados2,label="Salida")
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Regresion Lineal Utilizando TensorFlow')
+plt.grid()
+plt.legend()
 plt.show()
-
-print("Haciendo una prueba de datos")
-dato_prueba = 67
-resultado = modelo.predict([dato_prueba])
-
-print("Prediccion: ", str(dato_prueba), " grados celsius son: ", str(resultado), " grados fahrenheit")
-
-
 
 
 
