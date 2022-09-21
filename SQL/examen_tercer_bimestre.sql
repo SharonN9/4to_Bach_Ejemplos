@@ -1,55 +1,77 @@
-DROP DATABASE examen_alumno;
-CREATE DATABASE examen_alumno;
-USE examen_alumno;
+DROP DATABASE IF EXISTS vm_data;
+CREATE DATABASE IF NOT EXISTS vm_data;
+USE vm_data ;
 
-CREATE TABLE Edificio(
-	id_edificio INTEGER PRIMARY KEY,
-    nombre VARCHAR(25),
-    director VARCHAR(25),
-    direccion VARCHAR(100)
+-- -----------------------------------------------------
+-- Table Grado
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Grado (
+    id_grado INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(45) NOT NULL,
+    PRIMARY KEY (id_grado))
+;
+
+-- -----------------------------------------------------
+-- Table Estudiante
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Estudiante (
+    id_estudiante INT NOT NULL AUTO_INCREMENT,
+    clave INT NOT NULL,
+    nombres VARCHAR(45) NOT NULL,
+    apellidos VARCHAR(45) NULL,
+    id_grado INT NOT NULL,
+    PRIMARY KEY (id_estudiante),
+    FOREIGN KEY Estudiante(id_grado) REFERENCES Grado(id_grado)
 );
 
-CREATE TABLE Departamento(
-	id_departamento INTEGER PRIMARY KEY,
-    nombre VARCHAR(25),
-    encargado VARCHAR(25),
-    no_empleados INTEGER,
-    id_edificio INTEGER,
-    FOREIGN KEY Departamento(id_edificio) REFERENCES Edificio(id_edificio)
+-- -----------------------------------------------------
+-- Table Catedratico
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Catedratico (
+    id_catedratico INT NOT NULL AUTO_INCREMENT,
+    nombres VARCHAR(45) NOT NULL,
+    apellidos VARCHAR(45) NOT NULL,
+    usuario VARCHAR(45) NOT NULL,
+    password VARCHAR(45) NOT NULL,
+    PRIMARY KEY (id_catedratico))
+;
+
+-- -----------------------------------------------------
+-- Table Curso
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Curso (
+    id_curso INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(45) NULL,
+    PRIMARY KEY (id_curso))
+;
+
+
+-- -----------------------------------------------------
+-- Table Nota
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Nota (
+    id_nota INT NOT NULL AUTO_INCREMENT,
+    parcial INT NOT NULL,
+    examen INT NOT NULL,
+    progrentis INT NOT NULL,
+    taller INT NOT NULL,
+    asistencia INT NOT NULL,
+    PRIMARY KEY (id_nota))
+;
+
+-- -----------------------------------------------------
+-- Table Asignacion
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Asignacion (
+    id_asignacion INT NOT NULL AUTO_INCREMENT,
+    id_catedratico INT NOT NULL,
+    id_estudiante INT NOT NULL,
+    id_curso INT NOT NULL,
+    id_nota INT NOT NULL,
+    PRIMARY KEY (id_asignacion),
+    FOREIGN KEY (id_catedratico) REFERENCES Catedratico(id_catedratico),
+    FOREIGN KEY (id_estudiante) REFERENCES Estudiante(id_estudiante),
+    FOREIGN KEY (id_curso) REFERENCES Curso(id_curso),
+    FOREIGN KEY (id_nota) REFERENCES Nota(id_nota)
 );
 
-CREATE TABLE Empleados(
-	id_empleado INTEGER PRIMARY KEY,
-    nombre VARCHAR(25),
-    apellido VARCHAR(25),
-    edad INTEGER,
-    direccion VARCHAR(25),
-    no_telefono INTEGER,
-    id_departamento INTEGER,
-    FOREIGN KEY Empleado(id_departamento) REFERENCES Departamento(id_departamento)
-);
-
-INSERT INTO Edificio(id_edificio, nombre, director, direccion)
-	VALUES (1, 'Novex', 'Roberth Smith','Ciudad de Guatemala');
-    
-INSERT INTO Departamento(id_departamento,nombre, encargado, no_empleados, id_edificio)
-	VALUES (1, 'Administracion', 'Carlos Bran',3, 1);
-
-INSERT INTO Departamento(id_departamento,nombre, encargado, no_empleados, id_edificio)
-	VALUES (2, 'Contabilidad', 'Raul Estrada',4, 1);
-
-INSERT INTO Departamento(id_departamento,nombre,encargado, no_empleados, id_edificio)
-	VALUES (3, 'Recursos Humanos', 'Salvador Bautista',2, 1);
-    
-INSERT INTO Empleados(id_empleado,nombre,apellido,edad,direccion,no_telefono,id_departamento)
-	VALUES (1,'David', 'Marroquin',25,'Ciudad',123456789,1);
-
-INSERT INTO Empleados(id_empleado,nombre,apellido,edad,direccion,no_telefono,id_departamento)
-	VALUES (2,'Luis', 'Culajay',24,'Ciudad',123456789,2);
-
-INSERT INTO Empleados(id_empleado,nombre,apellido,edad,direccion,no_telefono,id_departamento)
-	VALUES (3,'Pablo', 'Sanchez',22,'Ciudad',123456789,3);
-
-
-SELECT e.nombre,e.apellido,d.nombre FROM Empleados e, Departamento d WHERE
- e.id_departamento = d.id_departamento;

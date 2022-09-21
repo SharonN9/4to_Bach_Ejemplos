@@ -30,19 +30,3 @@ plt.ylabel("Eje Y")
 plt.grid()
 plt.legend()
 plt.show()
-
-
-
-
-# "Examen Final Tercer Bimestre"
-# El resultado de: 6*8/2-6*3
-# <<Tu nombre>>
-
-var1 = "Examen Final Tercer Bimestre"
-print(var1)
-var2 = 6*8/2-6*3
-print(var2)
-var3 = "Diego Obin"
-print(var3)
-
-
