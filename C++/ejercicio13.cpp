@@ -29,9 +29,10 @@ int main(void){
     // Posicion de inicio de los indices?
     // La primera posicion es 0 y la ultima es: n-1
     // Los indices van del 0 al 9
+    for(int j = 0; j<10; j++){
+        cout << "La edad de "<< nombres[j] << " es de: " << edades[j] << endl;
 
-    cout << "La edad de "<< nombres[4] << " es de: " << edades[4];
-    
+    }
     // SALIDA EN PANTALLA:
     // La edad de Pablo es de 16
     // La edad de Raul es de 16
